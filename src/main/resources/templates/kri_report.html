@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>KRI Report</title>
+</head>
+<body>
+<h1>KRI Report for <span th:text="${riskType}">Risk Type</span></h1>
+<p>Period: <span th:text="${#dates.format(startDate, 'yyyy-MM-dd')}">Start Date</span> to <span th:text="${#dates.format(endDate, 'yyyy-MM-dd')}">End Date</span></p>
+<p>Aggregate KRI Score: <span th:text="${aggregateScore}">Score</span></p>
+<table>
+    <thead>
+    <tr>
+        <th>Name</th>
+        <th>Value</th>
+        <th>Weight</th>
+        <th>Date Recorded</th>
+    </tr>
+    </thead>
+    <tbody>
+    <tr th:each="kri : ${kris}">
+        <td th:text="${kri.name}">Name</td>
+        <td th:text="${kri.value}">Value</td>
+        <td th:text="${kri.weight}">Weight</td>
+        <td th:text="${#dates.format(kri.dateRecorded, 'yyyy-MM-dd')}">Date</td>
+    </tr>
+    </tbody>
+</table>
+</body>
+</html>

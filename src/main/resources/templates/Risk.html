@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>Create Risk</title>
+</head>
+<body>
+<form th:action="@{/risks/create}" th:object="${risk}" method="post">
+    <label for="name">Risk Name:</label>
+    <input type="text" id="name" th:field="*{name}" required>
+    <label for="description">Description:</label>
+    <textarea id="description" th:field="*{description}" required></textarea>
+    <label for="severity">Severity:</label>
+    <select id="severity" th:field="*{severity}" required>
+        <option value="Low">Low</option>
+        <option value="Medium">Medium</option>
+        <option value="High">High</option>
+    </select>
+    <label for="status">Status:</label>
+    <select id="status" th:field="*{status}" required>
+        <option value="Open">Open</option>
+        <option value="In Progress">In Progress</option>
+        <option value="Closed">Closed</option>
+    </select>
+    <label for="location">Location:</label>
+    <input type="text" id="location" th:field="*{location}" required>
+    <label for="mitigation">Mitigation Strategy:</label>
+    <textarea id="mitigation" th:field="*{mitigation}" required></textarea>
+    <button type="submit">Create Risk</button>
+</form>
+</body>
+</html>

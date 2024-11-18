@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>Key Risk Indicators</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz" crossorigin="anonymous"></script>
+
+</head>
+<body>
+<h1 align="center">Key Risk Indicators</h1>
+
+<!--<a ></a> </h1>-->
+<!--<a th:href="@{/kris/dashboard}"></a> </h1>-->
+
+
+<!--    <a class="nav-link active" aria-current="page" th:href="@{/kris/new}">Add New KRI</a>-->
+<!--    <a class="nav-link active" aria-current="page" th:href="@{/kris/dashboard}">KRI CHART</a>-->
+
+    <nav class="navbar navbar-expand-lg" style="background-color: #D3D3D3">
+        <div class="container-fluid">
+            <div class="collapse navbar-collapse" id="navbarNav">
+                <ul class="navbar-nav">
+                    <li class="nav-item">
+                        <a class="nav-link active" aria-current="page"  th:href="@{/kris/new}">Add New KRI</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" th:href="@{/kris/dashboard}">KRI Chart</a>
+                    </li>
+
+                </ul>
+            </div>
+        </div>
+    </nav>
+
+<!--    <a class="nav-link" href="#">Link</a>-->
+<!--    <a class="nav-link" href="#">Link</a>-->
+<!--    <a class="nav-link disabled" aria-disabled="true">Disabled</a>-->
+</br>
+<h2>Generate KRI Report</h2>
+
+<form th:action="@{/kris/report}" method="get" class="d-flex align-items-center">
+    <label for="riskType" class="form-label me-2">Risk Type:</label>
+    <input type="text" id="riskType" name="riskType" class="form-control d-inline-block" style="width: 150px;"
+           required></br> </br>
+    <label for="startDate" class="form-label me-2"
+    >Start Date:</label>
+    <input type="date" id="startDate" name="startDate"  class="form-control d-inline-block" style="width: 150px;"
+           required><br/> </br>
+    <label for="endDate" class="form-label me-2">End Date:</label>
+    <input type="date" id="endDate" name="endDate" class="form-control d-inline-block" style="width: 150px;"
+           required><br/></br>
+    <button type="submit">Generate Report</button>
+</form>
+</br>
+<table class="table">
+    <thead>
+    <tr>
+        <th  scope="col">ID</th>
+        <th  scope="col">Name</th>
+        <th  scope="col">Value</th>
+        <th  scope="col">Date Recorded</th>
+        <th  scope="col">Risk Type</th>
+    </tr>
+    </thead>
+
+    <tbody>
+    <tr scope="row" th:each="kri : ${kris}">
+        <td th:text="${kri.id}">1</td>
+        <td th:text="${kri.name}">Name</td>
+        <td th:text="${kri.value}">Value</td>
+        <td th:text="${#dates.format(kri.dateRecorded, 'yyyy-MM-dd')}">Date</td>
+        <td th:text="${kri.riskType}">Risk Type</td>
+    </tr>
+    </tbody>
+</table>
+</body>
+</html>

@@ -1,0 +1,13 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>Upload Risks</title>
+</head>
+<body>
+<form th:action="@{/risks/upload}" method="post" enctype="multipart/form-data">
+    <label for="file">Choose Excel file to upload:</label>
+    <input type="file" id="file" name="file" required>
+    <button type="submit">Upload</button>
+</form>
+</body>
+</html>

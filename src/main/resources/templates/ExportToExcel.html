@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>Export Risks</title>
+</head>
+<body>
+<h1>Filter and Export Risks</h1>
+<form th:action="@{/risks/export}" method="get">
+    <label for="severity">Severity:</label>
+    <select id="severity" name="severity">
+        <option value="">All</option>
+        <option value="Low">Low</option>
+        <option value="Medium">Medium</option>
+        <option value="High">High</option>
+    </select>
+    <label for="location">Location:</label>
+    <input type="text" id="location" name="location">
+    <label for="status">Status:</label>
+    <select id="status" name="status">
+        <option value="">All</option>
+        <option value="Open">Open</option>
+        <option value="In Progress">In Progress</option>
+        <option value="Closed">Closed</option>
+    </select>
+    <button type="submit">Export to Excel</button>
+</form>
+</body>
+</html>

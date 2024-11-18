@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>KRI Dashboard</title>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js@^3"></script>
+    <script src="https://cdn.jsdelivr.net/npm/moment@^2"></script>
+    <script src="https://cdn.jsdelivr.net/npm/chartjs-adapter-moment@^1"></script>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/chartjs-adapter-moment"></script>
+    <script src="https://cdn.jsdelivr.net/npm/moment/min/moment.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js/dist/chart.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/chartjs-adapter-date-fns/dist/chartjs-adapter-date-fns.bundle.min.js"></script>
+
+</head>
+<body>
+<h1>KRI Dashboard</h1>
+<canvas id="kriChart" width="400" height="200"></canvas>
+<script th:inline="javascript">
+    // Convert Thymeleaf data to JavaScript arrays
+
+    var failedTradesData = [[${failedTradesData}]];
+    var turnoverRateData = [[${turnoverRateData}]] ;
+    var errorFrequencyData = /*[[${errorFrequencyData}]]*/ ;
+    var errorSeverityData = /*[[${errorSeverityData}]]*/ ;
+    var dateLabels = /*[[${dateLabels}]]*/ '[]';  // Ensure dates are quoted
+
+
+
+    var ctx = document.getElementById('kriChart').getContext('2d');
+    var chart = new Chart(ctx, {
+        type: 'line',
+        data: {
+            labels: dateLabels,
+            datasets: [
+                {
+                    label: 'Failed Trades',
+                    data: failedTradesData,
+                    borderColor: 'rgba(255, 99, 132, 1)',
+                    fill: false
+                },
+                {
+                    label: 'Staff Turnover Rate',
+                    data: turnoverRateData,
+                    borderColor: 'rgba(54, 162, 235, 1)',
+                    fill: false
+                },
+                {
+                    label: 'Error Frequency',
+                    data: errorFrequencyData,
+                    borderColor: 'rgba(75, 192, 192, 1)',
+                    fill: false
+                },
+                {
+                    label: 'Error Severity',
+                    data: errorSeverityData,
+                    borderColor: 'rgba(153, 102, 255, 1)',
+                    fill: false
+                }
+            ]
+        },
+        options: {
+            scales: {
+                x: {
+                    type: 'time',
+                    time: {
+                        unit: 'month'
+                    }
+                },
+                y: {
+                    beginAtZero: true
+                }
+            }
+        }
+    });
+</script>
+</body>
+</html>

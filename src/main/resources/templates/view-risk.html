@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>Risk Details</title>
+    <script type="text/javascript">
+        function showNotAllowedMessage() {
+            alert("You are not allowed to perform this action.");
+        }
+    </script>
+
+</head>
+<body>
+<h1 th:text="${risk.name}">Risk Name</h1>
+<p>Description: <span th:text="${risk.description}">Description</span></p>
+<p>Severity: <span th:text="${risk.severity}">Severity</span></p>
+<p>Status: <span th:text="${risk.status}">Status</span></p>
+<p>Location: <span th:text="${risk.location}">Location</span></p>
+<p>Mitigation Strategy: <span th:text="${risk.mitigation}">Mitigation Strategy</span></p>
+
+<a  th:if="${risk.createdBY.username  == principal.username || principal.role.contains('ADMIN')}"
+    th:href="@{/risks/edit/{id}(id=${risk.id})}"
+>Edit</a>
+<a th:if="${!(risk.createdBY.username == principal.username || principal.role.contains('ADMIN'))}"
+   href="#" onclick="showNotAllowedMessage()">Edit</a>
+
+<a th:if="${risk.createdBY.username == principal.username || principal.role.contains('ROLE_ADMIN')}"
+   th:href="@{/risks/delete/{id}(id=${risk.id})}" onclick="return confirm('Are you sure you want to delete this risk?');">Delete</a>
+<a th:if="${!(risk.createdBY.username == principal.username || principal.role.contains('ROLE_ADMIN'))}"
+   href="#" onclick="showNotAllowedMessage()">Delete</a>
+
+</body>
+</html>
+
+
